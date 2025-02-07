@@ -1,0 +1,63 @@
+
+class RomanNumeralMapper:
+    """Class to generate and map Roman numerals onto a fixed sequence."""
+
+    def _init_(self, sequence):
+        self.sequence = sequence
+        self.roman_map = self._generate_roman_variations()
+
+    def _generate_roman_variations(self):
+        """Generate a dictionary of Roman numerals from 1 to 23."""
+        return {
+            1: "I", 2: "II", 3: "III", 4: "IV", 5: "V",
+            6: "VI", 7: "VII", 8: "VIII", 9: "IX", 10: "X",
+            11: "XI", 12: "XII", 13: "XIII", 14: "XIV", 15: "XV",
+            16: "XVI", 17: "XVII", 18: "XVIII", 19: "XIX", 20: "XX",
+            21: "XXI", 22: "XXII", 23: "XXIII"
+        }
+
+    def map_to_sequence(self, roman):
+        """Map Roman numeral characters to speci…
+[14:05, 30/01/2025] Professor António Clube: ficheiro minutos.py:
+def int_to_roman(n):
+    """Convert an integer to its Roman numeral representation."""
+    roman_pairs = [
+        (50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), 
+        (4, "IV"), (1, "I")
+    ]
+    roman = ""
+    for value, numeral in roman_pairs:
+        while n >= value:
+            roman += numeral
+            n -= value
+    return roman
+
+def generate_roman_numerals():
+    """Generate Roman numerals for numbers 1 to 59 dynamically."""
+    return {n: int_to_roman(n) for n in range(1, 60)}
+
+def map_roman_to_sequence(roman, sequence):
+    """Map Roman numeral characters to positions in a fixed sequence."""
+    sequence_list = list(sequence)
+    result = ['_' for _ in sequence]
+
+    for char in roman:
+        if char in sequence_list:
+            idx = sequence_list.index(char)
+            result[idx] = char
+            sequence_list[idx] = '_'  # Mark as used
+
+    return ''.join(result)
+
+def display_mapped_variations():
+    """Display Roman numeral variations mapped to sequence positions."""
+    sequence = "XLXXIXIVIII"
+    roman_numerals = generate_roman_numerals()
+
+    print("Mapping Roman numerals to sequence positions:")
+    for num, roman in roman_numerals.items():
+        mapped = map_roman_to_sequence(roman, sequence)
+        print(f"{num}: {roman} -> {mapped}")
+
+if _name_ == "_main_":
+    display_mapped_variations()
